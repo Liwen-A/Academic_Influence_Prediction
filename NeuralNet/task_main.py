@@ -66,6 +66,7 @@ for epoch in range(args.epochs):
 
     Path('results').mkdir(parents=True, exist_ok=True)
     if (epoch % 100 == 0):
+        print(epoch)
         f = open('results/' + 'train_log.txt', 'a')
     #    if (epoch == 0):
     #        f.write('## learning rate = ' + str(args.lr) + '\n')
