@@ -32,12 +32,14 @@ def get_data(names, batch_train, batch_test):
     datadf = pd.concat([datadf1, datadf2, datadf3], axis=0)
 
     xy = pd.concat([w2vdf, datadf], axis=1)
-
+    xy = xy.drop_duplicates(subset='paperId', keep='first')
     # remove outliers
     q_low = xy["citationCount"].quantile(0.01)
     q_hi  = xy["citationCount"].quantile(0.99)
 
     xy = xy[(xy["citationCount"] < q_hi) & (xy["citationCount"] > q_low)]
+
+    xy.to_csv('./xy.csv')
     datasize, dim = xy.shape
 
 
